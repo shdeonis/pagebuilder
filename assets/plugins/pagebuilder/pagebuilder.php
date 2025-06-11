@@ -523,7 +523,7 @@ class PageBuilder
         $this->data = [];
 
         if (!isset($this->params['template'])) {
-            if ($docid == $this->modx->documentIdentifier) {
+            if ($docid == $this->modx->documentIdentifier || $docid == 0) {
                 $this->params['template'] = $this->modx->documentObject['template'];
             } else {
                 $doc = $this->modx->getDocument($docid, 'template', 'all');
