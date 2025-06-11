@@ -1,3 +1,16 @@
+document.addEventListener('DOMContentLoaded', function() {
+    var tabElement = document.querySelector('h2.tab[data-target="#tabPB_"]');
+    if (tabElement) {
+        tabElement.addEventListener('click', function() {
+            for (var key in myCodeMirrors) {
+                if (myCodeMirrors.hasOwnProperty(key)) {
+                    myCodeMirrors[key].refresh();
+                }
+            }
+        });
+    }
+});
+    
     var initcontentblocks = function(opts) {
         return (function($) {
 
@@ -256,6 +269,13 @@
 
                                     if (conf[field].type == 'image') {
                                         ContentBlock.setThumb($field);
+                                    }
+                                    
+                                    if (conf[field].type == 'richtext') {
+                                        var $textarea = $field.children('textarea');
+                                        var textareaId = $textarea.attr('id');
+                                        myCodeMirrors[textareaId].setValue(values[field]);
+                                        myCodeMirrors[textareaId].refresh();
                                     }
                                 }
                             }
