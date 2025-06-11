@@ -138,7 +138,7 @@
                                 if (typeof tinymce != 'undefined' && f.id && tinymce.editors[f.id]) {
                                     values[field] = tinymce.editors[f.id].getContent();
                                 } else {
-                                    values[field] = $(f).val();
+									values[field] = myCodeMirrors[f.id].getValue();
                                 }
 
                                 break;
@@ -379,7 +379,10 @@
                     $rich.each(function() {
                         if (typeof tinymce != 'undefined' && this.id && tinymce.editors[this.id]) {
                             tinymce.editors[this.id].destroy();
-                        }
+						} else {
+							myCodeMirrors[this.id].toTextArea();
+							myCodeMirrors[this.id]=null;
+						}
                     });
 
                     if (direction == 'up') {
@@ -497,14 +500,19 @@
                             ui.item.find('textarea.richtext').each(function() {
                                 if (typeof tinymce != 'undefined' && this.id && tinymce.editors[this.id]) {
                                     tinymce.editors[this.id].save();
-                                }
+								} else {
+									myCodeMirrors[this.id].toTextArea();
+								}
                             });
                         },
                         stop: function(e, ui) {
                             ui.item.find('textarea.richtext').each(function() {
                                 if (typeof tinymce != 'undefined' && this.id && tinymce.editors[this.id]) {
                                     tinymce.editors[this.id].destroy();
-                                }
+								} else {
+									myCodeMirrors[this.id].toTextArea();
+									myCodeMirrors[this.id]=null;
+								}
                                 ContentBlock.initializeRichField($(this));
                             });
                         }
@@ -529,7 +537,10 @@
 
                         conf.selector = '#' + $textarea.attr('id');
                         tinymce.init(conf);
-                    }
+					} else {                                    
+						myCodeMirrors[$textarea.attr('id')] = CodeMirror.fromTextArea(document.getElementById($textarea.attr('id')),config);
+						myCodeMirrors[$textarea.attr('id')].refresh();
+					}
                 },
 
                 openBrowser: function($element, type, multipleCallback) {
