@@ -841,7 +841,7 @@ class PageBuilder
                     $params['layout'] = $field['layout'];
                 }
             }
-
+			case 'select':
             case 'dropdown': {
                 if (!empty($field['elements'])) {
                     $params['elements'] = $this->parseValues($field['elements']);

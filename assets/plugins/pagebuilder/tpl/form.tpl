@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="../assets/plugins/pagebuilder/styles/styles.css?<?= $version ?>">
 <script src="../assets/plugins/pagebuilder/js/jquery-ui.min.js"></script>
 <script src="../assets/plugins/pagebuilder/js/interaction.js?<?= $version ?>"></script>
+<link rel="stylesheet" href="../assets/plugins/pagebuilder/styles/tom-select.css">
+<script src="../assets/plugins/pagebuilder/js/tom-select.complete.js"></script>
 
 <?php $formid = md5(rand()); ?>
 
